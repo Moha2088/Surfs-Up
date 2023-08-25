@@ -24,10 +24,10 @@ namespace  SurfsProject.Models
                     new Surfboard
                     {
                         Name = "The Minilog",
-                        Length = 6.0,
-                        Width = 21.0,
-                        Thickness = 2.75,
-                        Volume = 38.8,
+                        Length = 6.0M,
+                        Width = 21.0M,
+                        Thickness = 2.75M,
+                        Volume = 38.8M,
                         Type = "Shortboard",
                         Price = 565,
                         Equipment = "None"

@@ -32,8 +32,8 @@ namespace SurfsProject.Migrations
                     b.Property<string>("Equipment")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Length")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Length")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -41,17 +41,17 @@ namespace SurfsProject.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<double>("Thickness")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Thickness")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Volume")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Volume")
+                        .HasColumnType("decimal(18, 2)");
 
-                    b.Property<double>("Width")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Width")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.HasKey("Id");
 

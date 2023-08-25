@@ -20,11 +20,17 @@ namespace SurfsProject.Controllers
         }
 
         // GET: Surfboards
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-              return _context.Surfboard != null ? 
-                          View(await _context.Surfboard.ToListAsync()) :
-                          Problem("Entity set 'SurfsProjectContext.Surfboard'  is null.");
+            var movies = from m in _context.Surfboard
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                movies = movies.Where(s => s.Name!.Contains(searchString));
+            }
+
+            return View(await movies.ToListAsync());
         }
 
         // GET: Surfboards/Details/5

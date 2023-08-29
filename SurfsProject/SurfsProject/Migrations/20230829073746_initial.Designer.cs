@@ -11,8 +11,8 @@ using SurfsProject.Data;
 namespace SurfsProject.Migrations
 {
     [DbContext(typeof(SurfsProjectContext))]
-    [Migration("20230825102918_Initial")]
-    partial class Initial
+    [Migration("20230829073746_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,8 +41,8 @@ namespace SurfsProject.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal>("Thickness")
                         .HasColumnType("decimal(18, 2)");

@@ -17,7 +17,8 @@ namespace SurfsProject.Models
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Volume { get; set; }
         public string Type { get; set; }
-        public Decimal Price { get; set; }
+        [Column(TypeName = "decimal(18, 2)")]
+        public decimal Price { get; set; }
         public string? Equipment { get; set; }
 
     }

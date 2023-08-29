@@ -20,21 +20,52 @@ namespace SurfsProject.Controllers
         }
 
         // GET: Surfboards
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-            var movies = from m in _context.Surfboard
-                         select m;
+            //add Volume, Type, Price, Equipment here
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["LengthSortParm"] = sortOrder == "Length" ? "Length_desc" : "Length";
+            ViewData["WidthsortParm"] = sortOrder == "Width" ? "Width_desc" : "Width";
+            ViewData["CurrentFilter"] = searchString;
 
+            var surfboards = from s in _context.Surfboard
+                             select s;
             if (!String.IsNullOrEmpty(searchString))
             {
-                movies = movies.Where(s => s.Name!.Contains(searchString));
+                //add Length, Width, Volume, Type, Price, Equipment
+                surfboards = surfboards.Where(s => s.Name.Contains(searchString)); 
+                                            //|| Length.Contains(searchString));
             }
+            switch (sortOrder)
+            {
+                case "Name":
+                    surfboards = surfboards.OrderByDescending(s => s.Name);
+                    break;
+                case "Length":
+                    surfboards = surfboards.OrderBy(s => s.Length);
+                    break;
+                case "Width_desc":
+                    surfboards = surfboards.OrderByDescending(s => s.Width);
+                    break;
+                default:
+                    surfboards = surfboards.OrderBy(s => s.Volume);
+                    break;
+                case "Type":
+                    surfboards = surfboards.OrderBy(s => s.Type);
+                    break;
+                case "Price":
+                    surfboards = surfboards.OrderBy(s => s.Price);
+                    break;
+                case "Equipment":
+                    surfboards = surfboards.OrderBy(s => s.Equipment);
+                    break;
 
-            return View(await movies.ToListAsync());
-        }
-
-        // GET: Surfboards/Details/5
-        public async Task<IActionResult> Details(int? id)
+            }
+        
+            return View(await surfboards.AsNoTracking().ToListAsync());
+    }
+            // GET: Surfboards/Details/5
+            public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Surfboard == null)
             {

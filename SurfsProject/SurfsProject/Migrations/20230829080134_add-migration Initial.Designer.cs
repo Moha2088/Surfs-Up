@@ -11,8 +11,8 @@ using SurfsProject.Data;
 namespace SurfsProject.Migrations
 {
     [DbContext(typeof(SurfsProjectContext))]
-    [Migration("20230829073746_initial")]
-    partial class initial
+    [Migration("20230829080134_add-migration Initial")]
+    partial class addmigrationInitial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

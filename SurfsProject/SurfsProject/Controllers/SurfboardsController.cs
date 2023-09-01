@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SurfsProject;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -20,9 +21,14 @@ namespace SurfsProject.Controllers
         }
 
         // GET: Surfboards
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(
+     string sortOrder,
+     string currentFilter,
+     string searchString,
+     int? pageNumber)
         {
             //add Volume, Type, Price, Equipment here
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Name" : "";
             ViewData["LengthSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Length" : "";
             ViewData["WidthSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Width" : "";
@@ -31,6 +37,15 @@ namespace SurfsProject.Controllers
             ViewData["TypeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Type" : "";
             ViewData["PriceSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Price" : "";
             ViewData["EquipmentSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Equipment" : "";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
 
             ViewData["CurrentFilter"] = searchString;
 
@@ -67,8 +82,11 @@ namespace SurfsProject.Controllers
                     break;
 
             }
-        
-            return View(await surfboards.AsNoTracking().ToListAsync());
+
+            int pageSize = 5;
+            return View(await PaginatedList<Surfboard>.CreateAsync(surfboards.AsNoTracking(), pageNumber ?? 1 , pageSize));
+
+            
     }
             // GET: Surfboards/Details/5
             public async Task<IActionResult> Details(int? id)

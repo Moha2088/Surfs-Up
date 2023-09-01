@@ -1,13 +1,13 @@
-﻿@model IEnumerable<SurfsProject.Models.Surfboard>
+﻿@model PaginatedList<SurfsProject.Models.Surfboard>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Surfboards</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" style="text-decoration: none;">Create New</a>
 </p>
 <form asp-action="Index" method="get">
     <div class="form-actions no-color">
@@ -15,7 +15,7 @@
             Find by name: 
             <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
             <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-action="Index">Back to Full List</a>
+            <a asp-action="Index"style="text-decoration: none" >Back to Full List</a>
         </label>
     </div>
 </form>
@@ -31,28 +31,28 @@
     <thead>
         <tr>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" style="text-decoration: none;">@Html.DisplayNameFor(model => model.Name)</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" style="text-decoration: none;">@Html.DisplayName("Name")</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["LengthSortParm"]" style="text-decoration: none;">@Html.DisplayNameFor(model => model.Length)</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["LengthSortParm"]" style="text-decoration: none;">@Html.DisplayName("Length")</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["WidthSortParm"]" style="text-decoration: none;">@Html.DisplayNameFor(model => model.Width)</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["WidthSortParm"]" style="text-decoration: none;">@Html.DisplayName("Width")</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["ThicknessSortParm"]" style="text-decoration: none;">@Html.DisplayNameFor(model => model.Thickness)</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ThicknessSortParm"]" style="text-decoration: none;">@Html.DisplayName("Thickness")</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["VolumeSortParm"]" style="text-decoration: none;">@Html.DisplayNameFor(model => model.Volume)</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["VolumeSortParm"]" style="text-decoration: none;">@Html.DisplayName("Volume")</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["TypeSortParm"]" style="text-decoration: none;">@Html.DisplayNameFor(model => model.Type)</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["TypeSortParm"]" style="text-decoration: none;">@Html.DisplayName("Type")</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]" style="text-decoration: none;">@Html.DisplayNameFor(model => model.Price)</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]" style="text-decoration: none;">@Html.DisplayName("Price")</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["EquipmentSortParm"]" style="text-decoration: none;">@Html.DisplayNameFor(model => model.Equipment)</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["EquipmentSortParm"]" style="text-decoration: none;">@Html.DisplayName("Equipment")</a>
             </th>
             <th></th>
         </tr>
@@ -85,11 +85,32 @@
                 @Html.DisplayFor(modelItem => item.Equipment)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" style="text-decoration: none;">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" style="text-decoration: none;">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" style="text-decoration: none;">Delete</a>
             </td>
         </tr>
+
 }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled"style="background-color:lightgrey">
+   Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled"style="background-color:lightblue">
+    Next
+</a>

@@ -23,9 +23,15 @@ namespace SurfsProject.Controllers
         public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             //add Volume, Type, Price, Equipment here
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["LengthSortParm"] = sortOrder == "Length" ? "Length_desc" : "Length";
-            ViewData["WidthsortParm"] = sortOrder == "Width" ? "Width_desc" : "Width";
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Name" : "";
+            ViewData["LengthSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Length" : "";
+            ViewData["WidthSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Width" : "";
+            ViewData["ThicknessSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Thickness" : "";
+            ViewData["VolumeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Volume" : "";
+            ViewData["TypeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Type" : "";
+            ViewData["PriceSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Price" : "";
+            ViewData["EquipmentSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Equipment" : "";
+
             ViewData["CurrentFilter"] = searchString;
 
             var surfboards = from s in _context.Surfboard
@@ -42,22 +48,22 @@ namespace SurfsProject.Controllers
                     surfboards = surfboards.OrderByDescending(s => s.Name);
                     break;
                 case "Length":
-                    surfboards = surfboards.OrderBy(s => s.Length);
+                    surfboards = surfboards.OrderByDescending(s => s.Length);
                     break;
-                case "Width_desc":
+                case "Width":
                     surfboards = surfboards.OrderByDescending(s => s.Width);
                     break;
                 default:
-                    surfboards = surfboards.OrderBy(s => s.Volume);
+                    surfboards = surfboards.OrderByDescending(s => s.Volume);
                     break;
                 case "Type":
-                    surfboards = surfboards.OrderBy(s => s.Type);
+                    surfboards = surfboards.OrderByDescending(s => s.Type);
                     break;
                 case "Price":
-                    surfboards = surfboards.OrderBy(s => s.Price);
+                    surfboards = surfboards.OrderByDescending(s => s.Price);
                     break;
                 case "Equipment":
-                    surfboards = surfboards.OrderBy(s => s.Equipment);
+                    surfboards = surfboards.OrderByDescending(s => s.Equipment);
                     break;
 
             }

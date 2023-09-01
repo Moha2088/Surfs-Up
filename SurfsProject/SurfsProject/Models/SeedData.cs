@@ -14,7 +14,7 @@ namespace  SurfsProject.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<SurfsProjectContext>>()))
             {
-                // Look for any movies.
+                // Look for any surfboards.
                 if (context.Surfboard.Any())
                 {
                     return;   // DB has been seeded

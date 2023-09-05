@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SurfsProject.Models;
 
 namespace SurfsProject.Data
 {
-    public class SurfsProjectContext : DbContext
+    public partial class SurfsProjectContext : IdentityDbContext<IdentityUser>
     {
         public SurfsProjectContext (DbContextOptions<SurfsProjectContext> options)
             : base(options)
@@ -15,5 +17,7 @@ namespace SurfsProject.Data
         }
 
         public DbSet<SurfsProject.Models.Surfboard> Surfboard { get; set; } = default!;
+        public DbSet<SurfsProject.Models.Surfboard> Identity { get; set; } = default!;
+    
     }
 }

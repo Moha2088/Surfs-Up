@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SurfsProject.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace SurfsProject.Data
 {
-    public class SurfsProjectContext : DbContext
+    public class SurfsProjectContext : IdentityDbContext
     {
         public SurfsProjectContext (DbContextOptions<SurfsProjectContext> options)
             : base(options)

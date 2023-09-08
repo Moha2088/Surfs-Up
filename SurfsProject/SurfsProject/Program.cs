@@ -1,8 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SurfsProject.Data;
 using SurfsProject.Models;
-using Microsoft.AspNetCore.Identity;
 namespace SurfsProject
 {
     public class Program
@@ -13,8 +13,9 @@ namespace SurfsProject
             builder.Services.AddDbContext<SurfsProjectContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("SurfsProjectContext") ?? throw new InvalidOperationException("Connection string 'SurfsProjectContext' not found.")));
 
-                        builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<SurfsProjectContext>();
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<SurfsProjectContext>();
+            builder.Services.AddControllersWithViews();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -40,13 +41,15 @@ namespace SurfsProject
             app.UseStaticFiles();
 
             app.UseRouting();
-                        app.UseAuthentication();;
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.MapRazorPages();
 
             app.Run();
         }

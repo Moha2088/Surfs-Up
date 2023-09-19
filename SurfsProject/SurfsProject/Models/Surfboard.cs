@@ -32,6 +32,5 @@ namespace SurfsProject.Models
 
         [Timestamp]
         public byte[] RowVersion { get; set; }
-      
     }
 }

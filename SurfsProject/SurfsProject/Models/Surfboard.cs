@@ -30,6 +30,8 @@ namespace SurfsProject.Models
         
         public string? Equipment { get; set; }
 
+        public bool Reserved { get; set; }
+
         [Timestamp]
         public byte[] RowVersion { get; set; }
     }

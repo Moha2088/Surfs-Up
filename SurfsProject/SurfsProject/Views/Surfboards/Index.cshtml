@@ -1,7 +1,7 @@
 ﻿@model PaginatedList<SurfsProject.Models.Surfboard>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Surfboards";
 }
 
 <h1>Surfboards</h1>
@@ -49,6 +49,9 @@
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["EquipmentSortParm"]" style="text-decoration: none;">@Html.DisplayName("Equipment")</a>
             </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ReservedSortParm"]" style="text-decoration: none;">@Html.DisplayName("Reserved")</a>
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -79,6 +82,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Equipment)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reserved)
+                </td>   
             <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" style="text-decoration: none;">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Id" style="text-decoration: none;">Details</a> |

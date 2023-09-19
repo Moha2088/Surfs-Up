@@ -23,7 +23,8 @@ namespace SurfsProject.Migrations
                     Volume = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Equipment = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Equipment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RowVersion = table.Column<byte>(type: "byte[]", nullable: false)
                 },
                 constraints: table =>
                 {

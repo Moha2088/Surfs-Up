@@ -29,6 +29,8 @@ namespace SurfsProject.Models
         public decimal Price { get; set; }
         
         public string? Equipment { get; set; }
+        [ForeignKey("dbo.AspNetUsers")]
+        public int? Rentee { get; set; }
 
         [Timestamp]
         public byte[] RowVersion { get; set; }

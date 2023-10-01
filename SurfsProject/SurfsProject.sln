@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurfsProject", "SurfsProject\SurfsProject.csproj", "{BB1C109F-F26D-43C0-B5F7-8EB41142C4BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurfsProject", "SurfsProject\SurfsProject.csproj", "{BB1C109F-F26D-43C0-B5F7-8EB41142C4BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurfboardsAPI", "SurfboardsAPI\SurfboardsAPI.csproj", "{6AB4C8CE-D043-482A-9E4B-B357B079E096}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{BB1C109F-F26D-43C0-B5F7-8EB41142C4BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB1C109F-F26D-43C0-B5F7-8EB41142C4BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB1C109F-F26D-43C0-B5F7-8EB41142C4BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AB4C8CE-D043-482A-9E4B-B357B079E096}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AB4C8CE-D043-482A-9E4B-B357B079E096}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AB4C8CE-D043-482A-9E4B-B357B079E096}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AB4C8CE-D043-482A-9E4B-B357B079E096}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

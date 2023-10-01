@@ -1,11 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Collections;
+using System.Linq;
+using SurfsProject.API.SeedDataAPI.Models;
+using System.Text.Json.Serialization;
 
-namespace SurfboardsAPI.Models
+namespace SeedDataAPI.Models
 {
-    public class Surfboards
-    {
-        public class Surfboard
+
+        public class SurfboardsAPI
         {
             public int Id { get; set; }
 
@@ -29,11 +33,14 @@ namespace SurfboardsAPI.Models
             public decimal Price { get; set; }
 
             public string? Equipment { get; set; }
-            [ForeignKey("dbo.AspNetUsers")]
-            public int? Rentee { get; set; }
+            //[ForeignKey("dbo.AspNetUsers")]
+           // public int? Rentee { get; set; }
 
-            [Timestamp]
-            public byte[] RowVersion { get; set; }
+            //[Timestamp]
+            //public byte[] RowVersion { get; set; }
+
+            public virtual List<SurfboardsAPI> Surfboards { get; set; }
+           
         }
-    }
 }
+

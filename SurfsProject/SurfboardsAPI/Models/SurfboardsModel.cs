@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Collections;
 using System.Linq;
-using SurfsProject.API.SeedDataAPI.Models;
+using SurfsProject.API.SeedDataModel.Models;
 using System.Text.Json.Serialization;
 
-namespace SeedDataAPI.Models
+namespace SeedDataModel.Models
 {
 
-        public class SurfboardsAPI
+        public class SurfboardsModel
         {
             public int Id { get; set; }
 
@@ -39,7 +39,7 @@ namespace SeedDataAPI.Models
             //[Timestamp]
             //public byte[] RowVersion { get; set; }
 
-            public virtual List<SurfboardsAPI> Surfboards { get; set; }
+            public virtual List<SurfboardsModel> Surfboards { get; set; }
            
         }
 }

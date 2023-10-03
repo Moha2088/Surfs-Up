@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SeedDataAPI.Models;
-using SurfsProject.API.SeedDataAPI.Models;
+using SeedDataModel.Models;
+using SurfsProject.API.SeedDataModel.Models;
+
+
 
 namespace API.Models
 {
@@ -12,20 +14,33 @@ namespace API.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<SurfboardsAPI>();
-                
+            modelBuilder.Entity<SurfboardsModel>();
+
             modelBuilder.Seed();
         }
+        public DbSet<SurfboardsModel> Surfboards { get; set; } = default!;
+    }
+    /*public partial class Rentingcontext : DbContext
+    {
+            public RentingContext(DbContextOptions<RentingContext> options) : base(options) { }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Renting>();
 
+            modelBuilder.();
+        }
+        public DbSet<SurfboardsModel> Surfboards { get; set; } = default!;
 
-        public DbSet<SurfboardsAPI> Surfboards { get; set; } = default!;
+    }
+
+        
         
 
 
-        //public DbSet<SurfboardsAPI.Models.SurfboardsAPI> Identity { get; set; } = default!;
+        //public DbSet<SurfboardsModel.Models.SurfboardsModel> Identity { get; set; } = default!;*/
 
 
-    }
+    
 }
 

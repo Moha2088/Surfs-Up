@@ -1,10 +1,10 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using SeedDataAPI.Models;
+using SeedDataModel.Models;
 
-namespace SurfsProject.API.SeedDataAPI.Models
+namespace SurfsProject.API.SeedDataModel.Models
 {
-    public static class SeedDataAPI
+    public static class SeedDataModel
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
@@ -17,8 +17,8 @@ namespace SurfsProject.API.SeedDataAPI.Models
                 {
                     return;   // DB has been seeded
                 }*/
-            modelBuilder.Entity<SurfboardsAPI>().HasData(
-                   new SurfboardsAPI
+            modelBuilder.Entity<SurfboardsModel>().HasData(
+                   new SurfboardsModel
                    {
                        Id = 1, 
                        Name = "The Minilog", 
@@ -30,7 +30,7 @@ namespace SurfsProject.API.SeedDataAPI.Models
                        Equipment = "",
                    },
 
-                   new SurfboardsAPI
+                   new SurfboardsModel
                    {
                        Id=2,
                        Name = "The Wide Glider",
@@ -43,7 +43,7 @@ namespace SurfsProject.API.SeedDataAPI.Models
                        Equipment = "",
                    },
 
-                   new SurfboardsAPI
+                   new SurfboardsModel
                    {
                        Id = 3,
                        Name = "The Golden Ratio",
@@ -56,7 +56,7 @@ namespace SurfsProject.API.SeedDataAPI.Models
                        Equipment = "",
                    },
 
-                   new SurfboardsAPI
+                   new SurfboardsModel
                    {
                        Id = 4,
                        Name = "Mahi Mahi",
@@ -69,7 +69,7 @@ namespace SurfsProject.API.SeedDataAPI.Models
                        Equipment = "",
                    },
 
-                    new SurfboardsAPI
+                    new SurfboardsModel
                     {
                         Id = 5,
                         Name = "The Emerald Glider",
@@ -82,7 +82,7 @@ namespace SurfsProject.API.SeedDataAPI.Models
                         Equipment = "",
                     },
 
-                     new SurfboardsAPI
+                     new SurfboardsModel
                      {
                          Id = 6,
                          Name = "The Bomb",
@@ -95,7 +95,7 @@ namespace SurfsProject.API.SeedDataAPI.Models
                          Equipment = "",
                      },
 
-                      new SurfboardsAPI
+                      new SurfboardsModel
                       {
                           Id = 7,
                           Name = "Walden Magic",
@@ -108,7 +108,7 @@ namespace SurfsProject.API.SeedDataAPI.Models
                           Equipment = "",
                       },
 
-                       new SurfboardsAPI
+                       new SurfboardsModel
                        {
                            Id = 8,
                            Name = "Naish One",
@@ -121,7 +121,7 @@ namespace SurfsProject.API.SeedDataAPI.Models
                            Equipment = "Paddle",
                        },
 
-                        new SurfboardsAPI
+                        new SurfboardsModel
                         {
                             Id = 9,
                             Name = "Six Tourer",
@@ -134,7 +134,7 @@ namespace SurfsProject.API.SeedDataAPI.Models
                             Equipment = "Fin, Paddle, Pump, Leash",
                         },
 
-                         new SurfboardsAPI
+                         new SurfboardsModel
                          {
                              Id = 10,
                              Name = "Naish Maliko",

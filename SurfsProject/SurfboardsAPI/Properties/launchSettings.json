@@ -9,7 +9,8 @@
     }
   },
   "profiles": {
-    "SurfboardsAPI": {
+    "
+      ": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

@@ -5,7 +5,7 @@
 namespace SurfsProject.Migrations
 {
     /// <inheritdoc />
-    public partial class AdddedRentee : Migration
+    public partial class AddedRentee : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

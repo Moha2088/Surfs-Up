@@ -13,7 +13,7 @@ namespace SurfsProject.Migrations
 {
     [DbContext(typeof(SurfsProjectContext))]
     [Migration("20230922101551_AdddedRentee")]
-    partial class AdddedRentee
+    partial class AddedRentee
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

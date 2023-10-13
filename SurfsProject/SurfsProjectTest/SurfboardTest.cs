@@ -13,6 +13,19 @@ namespace SurfsProjectTest
     public class SurfboardTests
     {
         [TestMethod]
+        public void TestSurfboardId() 
+        {
+            // Act
+            var surfboard = new Surfboard { Id = 10 };
+
+            // Arrange
+            var result = surfboard.Id;
+
+            // Assert
+            Assert.AreEqual(10, result);
+        }
+
+        [TestMethod]
         public void TestSurfboardLength() 
         {
             // Arrange
@@ -70,14 +83,55 @@ namespace SurfsProjectTest
         public void TestSurfboardType() 
         {
             // Arrange
-            var surfboard = new Surfboard { Type = "The Minilog" };
+            var surfboard = new Surfboard { Type = "Funboard" };
 
             // Act
             var result = surfboard.Type;
 
             // Assert
-            Assert.AreEqual("The Minilog", result);
+            Assert.AreEqual("Funboard", result);
         
         }
+
+        [TestMethod]
+        public void TestSurfboardPrice() 
+        {
+            // Arrange
+            var surfboard = new Surfboard { Price = 700};
+
+            // Act
+            var result = surfboard.Price;
+
+            // Assert
+            Assert.AreEqual(700, result);
+        
+        }
+
+        [TestMethod]
+        public void TestSurfboardName() 
+        {
+            // Arrange
+            var surfboard = new Surfboard { Name = "The Golden Ration" };
+
+            // Act
+            var result = surfboard.Name;
+
+            // Assert
+            Assert.AreEqual("The Golden Ration", result);
+        }
+
+        [TestMethod]
+        public void TestSurfboardEquipment()
+        {
+            // Arrange
+            var surfboard = new Surfboard { Equipment = " " };
+
+            // Act
+            var result = surfboard.Equipment;
+
+            // Assert
+            Assert.AreEqual(" ", result);
+        }
     }
+
 }

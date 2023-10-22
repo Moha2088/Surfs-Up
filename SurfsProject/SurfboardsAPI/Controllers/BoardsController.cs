@@ -24,57 +24,94 @@ namespace Surfsproject.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<SeedDataModel.Models.SurfboardsModel> GetSeedDataModel()
+        public IEnumerable<SeedDataModel.Models.SurfboardsModel> GetSeedData()
         {
             return _context.Surfboards.ToArray();
-
         }
 
-        [HttpGet("{Id}")]
-        public async Task<ActionResult<SurfboardsModel>> GetSurfBoardAPI(int Id, SurfboardsModel SurfboardsModel)
+        [HttpPost]
+        public async Task<ActionResult<SurfboardsModel>> Postboard(SurfboardsModel surfboards)
         {
-            if (_context.Surfboards == null)
-            {
-                return Problem("Surfboard not found");
-            }
-
-            var Surfbords = await _context.Surfboards
-                .Include(model => model.Type)
-                .Include(model => model.Equipment)
-                .FirstOrDefaultAsync(model => model.Id == Id);
-            if (SurfboardsModel == null)
-            {
-                return Problem("Surfboard is null");
-            }
-
-            return Ok(Surfbords);
-        }
-
-        [HttpDelete("{Id}")]
-        public async Task<IActionResult> DeleteSurfboardsModel(int Id)
-        {
-            if (_context.Surfboards == null)
-            {
-                return NotFound();
-            }
-            var surfBoards = await _context.Surfboards.FindAsync(Id);
-            if (surfBoards == null)
-            {
-                return NotFound();
-            }
-
-            _context.Surfboards.Remove(surfBoards);
+            _context.Surfboards.Add(surfboards);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return CreatedAtAction(
+                "GetSurfboards",
+                new { name = surfboards.Name },
+                surfboards);
         }
 
-        private bool SurfBoardAPIExists(int Id)
+        [HttpPut("{id}")]
+        public async Task<ActionResult> PutBoard(int id, SurfboardsModel surfboards)
         {
-            return (_context.Surfboards?.Any(e => e.Id == Id)).GetValueOrDefault();
+            //Does Surfboard have same ID as Id in URI?
+            if (id != surfboards.Id)
+            {
+                return BadRequest();
+            }
+
+            //Set Surfboard to "Modified"
+            _context.Entry(surfboards).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+
+            //Error handling for concurrency
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Surfboards.Any(p => p.Id == id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            //Everything went according to plan  
+            return NoContent();
+
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<SurfboardsModel>> DeleteBoard(int id)
+        {
+            var surfboards = await _context.Surfboards.FindAsync(id);
+            if (surfboards == null)
+            {
+                return NotFound();
+            }
+
+            _context.Surfboards.Remove(surfboards);
+            await _context.SaveChangesAsync();
+
+            return surfboards;
+        }
+
+        [HttpPost("{id}")]
+        [Route("Delete")]
+        public async Task<ActionResult> DeleteMultiple([FromQuery] int[] ids)
+        {
+            var surfboards = new List<SurfboardsModel>();
+            foreach (var id in ids)
+            {
+                var Surfboards = await _context.Surfboards.FindAsync(id);
+
+                if (surfboards == null)
+                {
+                    return NotFound();
+                }
+                surfboards.Add(Surfboards);
+            }
+
+
+            _context.Surfboards.RemoveRange(surfboards);
+            await _context.SaveChangesAsync();
+
+            return Ok(surfboards);
         }
 
     }
-    }
-
+}
 

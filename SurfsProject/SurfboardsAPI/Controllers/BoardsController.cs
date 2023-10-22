@@ -1,12 +1,8 @@
-﻿using Surfsproject.API.Controllers;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SeedDataModel.Models;
-using SeedDataModel;
-using System.Linq;
 using API.Models;
-using System.Net.Http;
-using Azure;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Surfsproject.API.Controllers
 {
@@ -14,7 +10,7 @@ namespace Surfsproject.API.Controllers
     [ApiController]
     public class BoardsController : Controller
     {
-        public readonly SurfboardsContext _context;
+        private readonly SurfboardsContext _context;
 
         public BoardsController(SurfboardsContext context)
         {
@@ -24,9 +20,9 @@ namespace Surfsproject.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<SeedDataModel.Models.SurfboardsModel> GetSeedData()
+        public ActionResult<SeedDataModel.Models.SurfboardsModel> GetSeedData()
         {
-            return _context.Surfboards.ToArray();
+            return Ok(_context.Surfboards.ToArray());
         }
 
         [HttpPost]
@@ -89,7 +85,7 @@ namespace Surfsproject.API.Controllers
             return surfboards;
         }
 
-        [HttpPost("{id}")]
+        /*[HttpPost("{id}")]
         [Route("Delete")]
         public async Task<ActionResult> DeleteMultiple([FromQuery] int[] ids)
         {
@@ -110,7 +106,7 @@ namespace Surfsproject.API.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(surfboards);
-        }
+        }*/
 
     }
 }

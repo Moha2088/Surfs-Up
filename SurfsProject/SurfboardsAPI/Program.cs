@@ -1,6 +1,5 @@
-using Surfsproject.API;
-using Microsoft.EntityFrameworkCore;
 using API.Models;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,9 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<SurfboardsContext>(options =>
-{
-    options.UseInMemoryDatabase("SurfsUP");
-});
+options.UseInMemoryDatabase("SurfsUp"));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

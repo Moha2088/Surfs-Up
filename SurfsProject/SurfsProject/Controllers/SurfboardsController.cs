@@ -9,9 +9,11 @@ using Microsoft.EntityFrameworkCore;
 using SurfsProject.Data;
 using SurfsProject.Models;
 using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SurfsProject.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class SurfboardsController : Controller
     {
         private readonly SurfsProjectContext _context;
@@ -23,10 +25,10 @@ namespace SurfsProject.Controllers
 
         // GET: Surfboards
         public async Task<IActionResult> Index(
-     string sortOrder,
-     string currentFilter,
-     string searchString,
-     int? pageNumber)
+             string sortOrder,
+             string currentFilter,
+             string searchString,
+             int? pageNumber)
         {
             //add Volume, Type, Price, Equipment here
             ViewData["CurrentSort"] = sortOrder;

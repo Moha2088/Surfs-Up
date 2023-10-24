@@ -17,7 +17,6 @@ namespace SurfsProject.Data
         }
 
         public DbSet<SurfsProject.Models.Surfboard> Surfboard { get; set; } = default!;
-        public DbSet<SurfsProject.Models.Surfboard> Identity { get; set; } = default!;
     
     }
 }

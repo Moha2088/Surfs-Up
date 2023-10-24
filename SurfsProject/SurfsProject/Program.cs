@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,9 +15,9 @@ namespace SurfsProject
                 options.UseSqlServer(builder.Configuration.GetConnectionString("SurfsProjectContext") ?? throw new InvalidOperationException("Connection string 'SurfsProjectContext' not found.")));
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<SurfsProjectContext>();
-            builder.Services.AddControllersWithViews();
+                .AddRoles<IdentityRole>().AddEntityFrameworkStores<SurfsProjectContext>();
 
+            
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
@@ -42,8 +43,9 @@ namespace SurfsProject
 
             app.UseRouting();
 
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
+            
 
             app.MapControllerRoute(
                 name: "default",

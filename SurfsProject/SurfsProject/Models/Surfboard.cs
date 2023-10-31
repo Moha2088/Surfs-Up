@@ -31,6 +31,7 @@ namespace SurfsProject.Models
         public string? Equipment { get; set; }
         [ForeignKey("dbo.AspNetUsers")]
         public string? Rentee { get; set; }
+        public bool? LoginOnly { get; set; }
 
         [Timestamp]
         public byte[] RowVersion { get; set; }

@@ -30,7 +30,7 @@ namespace SurfsProject.Models
         
         public string? Equipment { get; set; }
         [ForeignKey("dbo.AspNetUsers")]
-        public int? Rentee { get; set; }
+        public string? Rentee { get; set; }
 
         [Timestamp]
         public byte[] RowVersion { get; set; }

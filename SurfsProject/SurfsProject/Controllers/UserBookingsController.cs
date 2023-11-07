@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using SurfsProject.Data;
 using SurfsProject.Models;
 using System.Drawing.Printing;
@@ -9,7 +11,6 @@ using System.Security.Claims;
 
 namespace SurfsProject.Controllers
 {
-    [AllowAnonymous]
     public class UserBookingsController : Controller
     {
         private readonly SurfsProjectContext _context;
@@ -49,6 +50,15 @@ namespace SurfsProject.Controllers
             var surfboards = from s in _context.Surfboard
                              select s;
 
+            if(User.Identity.IsAuthenticated)
+            {
+                string currentUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                surfboards = surfboards.Where(x => x.Rentee == null || x.Rentee == ""/* || x.Rentee == currentUserId*/);
+            }
+            else
+            {
+                surfboards = surfboards.Where(x => (x.Rentee == null || x.Rentee == "") && x.LoginOnly != true);
+            }
 
             switch (sortOrder)
             {
@@ -157,6 +167,7 @@ namespace SurfsProject.Controllers
             return RedirectToAction(nameof(RentedBoards));
         }
 
+        [Authorize]
         public async Task<IActionResult> RentedBoards(
              string sortOrder,
              string currentFilter,

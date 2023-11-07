@@ -20,6 +20,21 @@ namespace API.Models
         }
         public DbSet<SurfboardsModel> Surfboards { get; set; } = default!;
     }
+    public partial class LuxurySurfboardsContext : DbContext
+    {
+
+
+        public LuxurySurfboardsContext(DbContextOptions<SurfboardsContext> options) : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SurfboardsModel>();
+
+            modelBuilder.Seed();
+        }
+    
+        public DbSet<SurfboardsModel> LuxurySurfboards { get; internal set; } = default!;
+    }
     /*public partial class Rentingcontext : DbContext
     {
             public RentingContext(DbContextOptions<RentingContext> options) : base(options) { }
@@ -41,6 +56,6 @@ namespace API.Models
         //public DbSet<SurfboardsModel.Models.SurfboardsModel> Identity { get; set; } = default!;*/
 
 
-    
+
 }
 

@@ -4,10 +4,12 @@ using API.Models;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Surfsproject.API.Controllers
+namespace Surfsproject.API.Controllers.v1
 {
-    [Route("api/[controller]")]
+
     [ApiController]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("1.0")]
     public class BoardsController : Controller
     {
         private readonly SurfboardsContext _context;
@@ -110,4 +112,5 @@ namespace Surfsproject.API.Controllers
 
     }
 }
+
 

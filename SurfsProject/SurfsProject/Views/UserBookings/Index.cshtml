@@ -39,9 +39,7 @@
     <tbody>
 
         @{
-            var availableBoards = Model
-            .Where(board => board.Rentee == null)
-            .ToList();
+            var availableBoards = Model.ToList();
 
             foreach (var item in availableBoards)
             {
@@ -69,9 +67,6 @@
                     </th>
                     <th>
                         @Html.DisplayFor(modelitem => item.Equipment)
-                    </th>
-                    <th>
-                        @Html.DisplayFor(modelitem => item.Rentee)
                     </th>
 
                     @if (User.Identity.IsAuthenticated && item.Rentee == null)

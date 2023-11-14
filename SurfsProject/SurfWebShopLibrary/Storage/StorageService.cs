@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SurfsWebShopLibrary.ShoppingCart.Models;
+
 namespace SurfsWebShopLibrary.Storage
 {
     /// <summary>
@@ -25,7 +26,7 @@ namespace SurfsWebShopLibrary.Storage
         /// <summary>
         ///  Constructs a storage service.
         /// </summary>
-        public StorageService() : IStorageService
+        public StorageService()
         {
             Products = new List<ProductModel>();
             ShoppingCart = new ShoppingCartModel();
@@ -53,5 +54,7 @@ namespace SurfsWebShopLibrary.Storage
             }
         }
     }
-
 }
+
+
+

@@ -1,6 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using SeedDataModel.Models;
+using SeedData.Models;
 
 namespace SurfsProject.API.SeedDataModel.Models
 {

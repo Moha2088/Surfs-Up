@@ -1,4 +1,5 @@
 using API.Models;
+using LuxuryAPI.Models;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +33,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();
 
 builder.Services.AddDbContext<SurfboardsContext>(options =>
-options.UseInMemoryDatabase("SurfsUp"));
+options.UseInMemoryDatabase("SurfboardsDatabase"));
+builder.Services.AddDbContext<LuxuryContext>(options =>
+options.UseInMemoryDatabase("LuxurySurboardDatabase"));
 
 
 

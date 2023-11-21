@@ -1,71 +1,73 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SeedDataModel.Models;
-using API.Models;
+using LuxurySeedData.Models;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using SurfsProject.API.SeedDataModel.Models;
 using SurfsProject.API.LuxurySeedData.Models;
+using LuxuryAPI.Models;
+using API.Models;
 
 namespace Surfsproject.Controllers.v2
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("2.0")]
-        public class LuxuryBoardsController : Controller
+        public class LuxuryBoardsController : ControllerBase
         {
-            private readonly SurfboardsContext _context;
+            private readonly LuxuryContext _Luxurycontext;
 
-            public LuxuryBoardsController(SurfboardsContext context)
+            public LuxuryBoardsController(LuxuryContext Luxurycontext)
             {
-                _context = context;
+                _Luxurycontext = Luxurycontext;
 
-                _context.Database.EnsureCreated();
+            _Luxurycontext.Database.EnsureCreated();
             }
 
-            [HttpGet("api/LuxuryBoards/SeedData")]
-            public ActionResult<SeedDataModel.Models.SurfboardsModel> GetSeedData()
+            /*[HttpGet("api2/LuxuryBoards/SeedData")]
+            public ActionResult<LuxurySeedData.Models.LuxurySurfboardsModel> GetSeedData()
             {
                 return Ok(_context.Surfboards.ToArray());
             }
+            */
 
-            [HttpGet("api/LuxuryBoards/LuxurySeedData")]
-            public ActionResult<SeedDataModel.Models.SurfboardsModel> GetLuxurySeedData()
+            [HttpGet]
+            public ActionResult<LuxurySeedData.Models.LuxurySurfboardsModel> GetLuxurySeedData()
             {
-                return Ok(_context.LuxurySurfboards.ToArray());
+                return Ok(_Luxurycontext.LuxurySurfboards.ToArray());
             }
 
             [HttpPost]
-            public async Task<ActionResult<SurfboardsModel>> Postboard(SurfboardsModel surfboards)
+            public async Task<ActionResult<LuxurySurfboardsModel>> Postboard(LuxurySurfboardsModel LuxurySurfboards)
             {
-                _context.Surfboards.Add(surfboards);
-                await _context.SaveChangesAsync();
+                _Luxurycontext.LuxurySurfboards.Add(LuxurySurfboards);
+                await _Luxurycontext.SaveChangesAsync();
 
                 return CreatedAtAction(
                     "GetSurfboards",
-                    new { name = surfboards.Name },
-                    surfboards);
+                    new { name = LuxurySurfboards.Name },
+                    LuxurySurfboards);
             }
 
             [HttpPut("{id}")]
-            public async Task<ActionResult> PutBoard(int id, SurfboardsModel surfboards)
+            public async Task<ActionResult> PutBoard(int id, LuxurySurfboardsModel LuxurySurfboards)
             {
                 //Does Surfboard have same ID as Id in URI?
-                if (id != surfboards.Id)
+                if (id != LuxurySurfboards.Id)
                 {
                     return BadRequest();
                 }
 
                 //Set Surfboard to "Modified"
-                _context.Entry(surfboards).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                _Luxurycontext.Entry(LuxurySurfboards).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 try
                 {
-                    await _context.SaveChangesAsync();
+                    await _Luxurycontext.SaveChangesAsync();
                 }
 
                 //Error handling for concurrency
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!_context.Surfboards.Any(p => p.Id == id))
+                    if (!_Luxurycontext.LuxurySurfboards.Any(p => p.Id == id))
                     {
                         return NotFound();
                     }
@@ -80,18 +82,18 @@ namespace Surfsproject.Controllers.v2
             }
 
             [HttpDelete("{id}")]
-            public async Task<ActionResult<SurfboardsModel>> DeleteBoard(int id)
+            public async Task<ActionResult<LuxurySurfboardsModel>> DeleteBoard(int id)
             {
-                var surfboards = await _context.Surfboards.FindAsync(id);
-                if (surfboards == null)
+                var LuxurySurfboards = await _Luxurycontext.LuxurySurfboards.FindAsync(id);
+                if (LuxurySurfboards == null)
                 {
                     return NotFound();
                 }
 
-                _context.Surfboards.Remove(surfboards);
-                await _context.SaveChangesAsync();
+                _Luxurycontext.LuxurySurfboards.Remove(LuxurySurfboards);
+                await _Luxurycontext.SaveChangesAsync();
 
-                return surfboards;
+                return LuxurySurfboards;
             }
 
             /*[HttpPost("{id}")]

@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SeedDataModel.Models;
+using LuxurySeedData.Models;
 using API.Models;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using SeedData.Models;
 
 namespace Surfsproject.API.Controllers.v1
 {
@@ -10,28 +11,28 @@ namespace Surfsproject.API.Controllers.v1
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
-    public class BoardsController : Controller
+    public class BoardsController : ControllerBase
     {
-        private readonly SurfboardsContext _context;
+        private readonly SurfboardsContext _Normalcontext;
 
-        public BoardsController(SurfboardsContext context)
+        public BoardsController(SurfboardsContext Normalcontext)
         {
-            _context = context;
+            _Normalcontext = Normalcontext;
 
-            _context.Database.EnsureCreated();
+            _Normalcontext.Database.EnsureCreated();
         }
 
         [HttpGet]
-        public ActionResult<SeedDataModel.Models.SurfboardsModel> GetSeedData()
-        {
-            return Ok(_context.Surfboards.ToArray());
+        public ActionResult<LuxurySeedData.Models.LuxurySurfboardsModel> GetSeedData()
+        {   
+            return Ok(_Normalcontext.Surfboards.ToArray());
         }
 
         [HttpPost]
         public async Task<ActionResult<SurfboardsModel>> Postboard(SurfboardsModel surfboards)
         {
-            _context.Surfboards.Add(surfboards);
-            await _context.SaveChangesAsync();
+            _Normalcontext.Surfboards.Add(surfboards);
+            await _Normalcontext.SaveChangesAsync();
 
             return CreatedAtAction(
                 "GetSurfboards",
@@ -49,16 +50,16 @@ namespace Surfsproject.API.Controllers.v1
             }
 
             //Set Surfboard to "Modified"
-            _context.Entry(surfboards).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _Normalcontext.Entry(surfboards).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             try
             {
-                await _context.SaveChangesAsync();
+                await _Normalcontext.SaveChangesAsync();
             }
 
             //Error handling for concurrency
             catch (DbUpdateConcurrencyException)
             {
-                if (!_context.Surfboards.Any(p => p.Id == id))
+                if (!_Normalcontext.Surfboards.Any(p => p.Id == id))
                 {
                     return NotFound();
                 }
@@ -75,14 +76,14 @@ namespace Surfsproject.API.Controllers.v1
         [HttpDelete("{id}")]
         public async Task<ActionResult<SurfboardsModel>> DeleteBoard(int id)
         {
-            var surfboards = await _context.Surfboards.FindAsync(id);
+            var surfboards = await _Normalcontext.Surfboards.FindAsync(id);
             if (surfboards == null)
             {
                 return NotFound();
             }
 
-            _context.Surfboards.Remove(surfboards);
-            await _context.SaveChangesAsync();
+            _Normalcontext.Surfboards.Remove(surfboards);
+            await _Normalcontext.SaveChangesAsync();
 
             return surfboards;
         }

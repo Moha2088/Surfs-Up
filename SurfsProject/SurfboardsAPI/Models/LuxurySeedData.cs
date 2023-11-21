@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SeedDataModel.Models;
+using LuxurySeedData.Models;
+
 
 namespace SurfsProject.API.LuxurySeedData.Models
 {
@@ -16,10 +17,10 @@ namespace SurfsProject.API.LuxurySeedData.Models
                 {
                     return;   // DB has been seeded
                 }*/
-            modelBuilder.Entity<SurfboardsModel>().HasData(
-                   new SurfboardsModel
+            modelBuilder.Entity<LuxurySurfboardsModel>().HasData(
+                   new LuxurySurfboardsModel
                    {
-                       Id = 25,
+                       Id = 11,
                        Name = "The Primium",
                        Length = 6,
                        Width = 21,

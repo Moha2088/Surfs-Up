@@ -32,14 +32,16 @@ namespace SurfsWebShopLibrary.Storage
             ShoppingCart = new ShoppingCartModel();
 
             // Store a list of all the products for the online shop.
-            AddProduct(new ProductModel("BUBBLES-GUMBALL-APRON", "A Gumball for Your Thoughts Apron", 24, "bubbles-gumball-apron-black.jpg"));
-            AddProduct(new ProductModel("REX-MICROCONTROLLERS-APRON", "Great Microcontrollers Think Alike Apron", 24, "rex-microcontrollers-apron-black.jpg"));
-            AddProduct(new ProductModel("DOLORES-COMPUTE-BASEBALLHAT", "I Compute, Therefore I Am Baseball Hat", 29, "dolores-compute-baseballhat-black.jpg"));
-            AddProduct(new ProductModel("BUBBLES-GUMBALL-BASEBALLHAT", "A Gumball for Your Thoughts Baseball Hat", 29, "bubbles-gumball-baseballhat-black.jpg"));
-            AddProduct(new ProductModel("REX-MICROCONTROLLERS-BASEBALLHAT", "Great Microcontrollers Think Alike Baseball Hat", 29, "rex-microcontrollers-baseballhat-black.jpg"));
-            AddProduct(new ProductModel("DOLORES-COMPUTE-MUG", "I Compute, Therefore I Am Mug", 16, "dolores-compute-mug-black.jpg"));
-            AddProduct(new ProductModel("DOLORES-COMPUTE-TSHIRT", "I Compute, Therefore I Am T-shirt", 26, "dolores-compute-tshirt-black.jpg"));
-            AddProduct(new ProductModel("REX-MICROCONTROLLERS-TSHIRT", "Great Microcontrollers Think Alike T-shirt", 26, "rex-microcontrollers-tshirt-black.jpg"));
+            AddProduct(new ProductModel("Shortboard", "The Minilog", 24, "shortboard-theminilog.jpg"));
+            AddProduct(new ProductModel("Funboard", "The Wide Glider", 24, "Funboard-TheWideGlider.jpg"));
+            AddProduct(new ProductModel("Shortboard", "The Golden Ratio", 29, "Shortboard-TheGoldenRatio.jpg"));
+            AddProduct(new ProductModel("Fish", "Mahi Mahi", 29, "fish-MahiMahi.jpg"));
+            AddProduct(new ProductModel("Longboard", "The Emerald Glider", 29, "longboard-TheEmeraldGlider.jpg"));
+            AddProduct(new ProductModel("Shortboard", "The Bomb", 16, "shortboard-TheBomb.jpg"));
+            AddProduct(new ProductModel("Longboard", "Walden Magic", 26, "longboard-WaldenMagic.jpg"));
+            AddProduct(new ProductModel("SUP", "Naish One", 27, "SUP-NaishOne.jpg"));
+            AddProduct(new ProductModel("SUP", "Six Tourer", 28, "SUP-SixTourer.jpg"));
+            AddProduct(new ProductModel("SUP", "Naish Maliko", 29, "SUP-NaishMaliko.jpg"));
         }
 
         /// <summary>

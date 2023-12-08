@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace SurfsWebShopLibrary.Product.Models
 {
+    /// <summary>
+    /// The information needed in a product listing Razor component
+    /// </summary>
     public interface IProductAddToCart
     {
-        /// <summary>
-        /// The information needed in a product listing Razor component
-        /// </summary>
-        public interface IProductAddToCart
-        {
             // An instance of the product
             ProductModel? Product { get; set; }
 
@@ -23,6 +21,6 @@ namespace SurfsWebShopLibrary.Product.Models
             /// The method to add a product to cart
             /// </summary>
             void AddToCart();
-        }
+        
     }
 }

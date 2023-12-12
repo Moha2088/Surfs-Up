@@ -23,6 +23,7 @@
                         <p>Not found</p>
                     </div>
                 }
+
                 else
                 {
                     <div class="display:flex flex-direction:column flex-grow:0 flex-shrink:0 margin-bottom:32 padding-horizontal:16 width:100 @@mq-768--width:50">
@@ -42,31 +43,62 @@
                                         {
                                             <text>Add @Quantity more?</text>
                                         }
+
                                     </span>
                                 }
+
                                 else
                                 {
                                     <span>
                                         Add @Quantity to Cart?
                                     </span>
                                 }
+
                             </button>
+                            <ConfirmDialog @ref="confirmDialog" />
                         </div>
-                        @if (AllProducts != null)
+
+                        <Modal @ref="modal" Title="Board Image" Size="ModalSize.Large" IsVerticallyCentered>
+                         <BodyTemplate>
+                             <img style="display:block; margin-left:auto; margin-right:auto;" src="/Images/@Product.Image" />
+                         </BodyTemplate>
+                         <FooterTemplate>
+                             <Button Color="ButtonColor.Danger" Size="Size.Small" @onclick="OnHideModalClick">Close</Button>
+                             <Button Color="ButtonColor.Primary" Size="Size.Small" @onclick="OnShowSecondModalClick">Next Image</Button>
+                         </FooterTemplate>
+                     </Modal>
+
+                     <Modal @ref="modal2" Title="Board Image" Size="ModalSize.Large">
+                         <BodyTemplate>
+                             <img style="transform:rotate(90deg); display:block; margin-right:auto; margin-left:auto;" class="RotatedImg" src="/Images/@Product.Image" />
+                         </BodyTemplate>
+                         <FooterTemplate>
+                             <Button Color="ButtonColor.Primary" Size="Size.Small" @onclick="PrevImage">Previous Image</Button>
+                             <Button Color="ButtonColor.Danger" Size="Size.Small" @onclick="OnHideSecondModalClick">Close</Button>
+                         </FooterTemplate>
+                     </Modal>
+
+                     <Button Style="width:27%; height:45px;" Color="ButtonColor.Primary" Size="Size.ExtraSmall" @onclick="OnShowModalClick">Board View</Button>
+
+                     @if (AllProducts != null)
                         {
                             <ul>
                                 @foreach (var product in AllProducts)
                                 {
                                     <li><a href="@product.FullUrl">@product.Name</a></li>
                                 }
+
                             </ul>
                         }
+
                     </div>
                 }
+
             </div>
         </div>
     </div>
 </main>
+
 @code {
     public ProductModel? Product { get; set; }
 
@@ -76,7 +108,14 @@
     public string? Slug { get; set; }
 
     public IList<ProductModel>? AllProducts { get; set; }
+
+    private ConfirmDialog confirmDialog = default!;
+
+    private Modal modal = default!;
+
+    private Modal modal2 = default!;
 }
+
 @functions {
     protected override void OnInitialized()
     {
@@ -92,12 +131,58 @@
             Product = productService.GetBySlug(Slug);
         }
     }
-    public void AddToCart()
+
+    public async Task AddToCart()
     {
-        if (Product != null)
-        {
-            shoppingCartService.AddProduct(Product, Quantity ?? 1);
-            Quantity = null;
+        var options = new ConfirmDialogOptions
+            {
+                YesButtonText = "Add",
+                YesButtonColor = ButtonColor.Primary,
+                NoButtonText = "Go Back",
+                NoButtonColor = ButtonColor.Danger,
+                IsVerticallyCentered = true
+            };
+
+        var confirmation = await confirmDialog.ShowAsync(
+            title: "Add to cart",
+            message1: "Press 'Add' to add the product to your shoppingcart, or 'Go Back' to go back to product view",
+            confirmDialogOptions: options
+        );
+
+        if (confirmation)
+        {   
+            if (Product != null)
+            {
+                shoppingCartService.AddProduct(Product, Quantity ?? 1);
+                Quantity = null;
+            }
         }
+    }
+
+    private async Task OnShowModalClick()
+    {
+        await modal.ShowAsync();
+    }
+
+    private async Task OnHideModalClick()
+    {
+        await modal.HideAsync();
+    }
+
+    private async Task OnShowSecondModalClick()
+    {
+        await modal.HideAsync();
+        await modal2.ShowAsync();
+    }
+
+    private async Task PrevImage()
+    {
+        await modal2.HideAsync();
+        await modal.ShowAsync();
+    }
+
+    private async Task OnHideSecondModalClick()
+    {
+        await modal2.HideAsync();
     }
 }
